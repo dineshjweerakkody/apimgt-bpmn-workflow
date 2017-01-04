@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://www.activiti.org/test" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test" id="m1481371445599" name="">
+  <process id="SubscriptionWorkflow" name="Review And Approve Activiti Process" isExecutable="true" isClosed="false" processType="None">
+    <startEvent id="_2" name="StartEvent" activiti:initiator="admin">
+      <extensionElements>
+        <activiti:formProperty id="apiName" name="APIName" type="string" variable="apiName" required="true"></activiti:formProperty>
+        <activiti:formProperty id="apiVersion" name="APIVersion" type="string" variable="apiVersion" required="true"></activiti:formProperty>
+        <activiti:formProperty id="apiContext" name="APIContext" type="string" variable="apiContext" required="true"></activiti:formProperty>
+        <activiti:formProperty id="apiProvider" name="APIProvider" type="string" variable="apiProvider" required="true"></activiti:formProperty>
+        <activiti:formProperty id="subscriber" name="Subscriber" type="string" variable="subscriber" required="true"></activiti:formProperty>
+        <activiti:formProperty id="applicationName" name="ApplicationName" type="string" variable="applicationName" required="true"></activiti:formProperty>
+        <activiti:formProperty id="tierName" name="TierName" type="string" variable="tierName" required="true"></activiti:formProperty>
+        <activiti:formProperty id="workflowExternalRef" name="WorkflowExternalRef" type="string" variable="workflowExternalRef" required="true"></activiti:formProperty>
+        <activiti:formProperty id="callBackURL" name="CallBackURL" type="string" variable="callBackURL" required="true"></activiti:formProperty>
+      </extensionElements>
+    </startEvent>
+    <userTask id="_4" name="ApproveOrReject" activiti:assignee="admin">
+      <extensionElements>
+          <activiti:formProperty id="apiName" name="APIName" type="string" variable="apiName" required="true"></activiti:formProperty>
+          <activiti:formProperty id="apiVersion" name="APIVersion" type="string" variable="apiVersion" required="true"></activiti:formProperty>
+          <activiti:formProperty id="apiContext" name="APIContext" type="string" variable="apiContext" required="true"></activiti:formProperty>
+          <activiti:formProperty id="apiProvider" name="APIProvider" type="string" variable="apiProvider" required="true"></activiti:formProperty>
+          <activiti:formProperty id="subscriber" name="Subscriber" type="string" variable="subscriber" required="true"></activiti:formProperty>
+          <activiti:formProperty id="applicationName" name="ApplicationName" type="string" variable="applicationName" required="true"></activiti:formProperty>
+          <activiti:formProperty id="tierName" name="TierName" type="string" variable="tierName" required="true"></activiti:formProperty>
+          <activiti:formProperty id="workflowExternalRef" name="WorkflowExternalRef" type="string" variable="workflowExternalRef" required="true"></activiti:formProperty>
+          <activiti:formProperty id="callBackURL" name="CallBackURL" type="string" variable="callBackURL" required="true"></activiti:formProperty>
+        <activiti:formProperty id="status" name="Status" type="enum" variable="status" required="true">
+          <activiti:value id="true" name="approve"></activiti:value>
+          <activiti:value id="false" name="reject"></activiti:value>
+        </activiti:formProperty>
+        <!-- Remove this if you don't want to set the publisher as assignee of the task -->
+        <activiti:taskListener event="create" class="org.wso2.apimgt.workflow.bpmn.listeners.ChangeAssigneeTaskListner">
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="org.wso2.apimgt.workflow.bpmn.listeners.SubscriptionCreationBPMNWorkflowExecutor">
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <endEvent id="_3" name="EndEvent"></endEvent>
+    <sequenceFlow id="_6" sourceRef="_2" targetRef="_4"></sequenceFlow>
+    <sequenceFlow id="flow1" sourceRef="_4" targetRef="_3"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_SubscriptionWorkflow">
+    <bpmndi:BPMNPlane bpmnElement="SubscriptionWorkflow" id="BPMNPlane_SubscriptionWorkflow">
+      <bpmndi:BPMNShape bpmnElement="_2" id="BPMNShape__2">
+        <omgdc:Bounds height="35.0" width="35.0" x="150.0" y="90.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_4" id="BPMNShape__4">
+        <omgdc:Bounds height="55.0" width="150.0" x="93.0" y="290.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_3" id="BPMNShape__3">
+        <omgdc:Bounds height="35.0" width="35.0" x="150.0" y="580.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_6" id="BPMNEdge__6">
+        <omgdi:waypoint x="167.0" y="125.0"></omgdi:waypoint>
+        <omgdi:waypoint x="168.0" y="290.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="168.0" y="345.0"></omgdi:waypoint>
+        <omgdi:waypoint x="167.0" y="580.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

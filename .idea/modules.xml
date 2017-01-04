@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/apim-workflow-executors/apim-workflow-executors.iml" filepath="$PROJECT_DIR$/apim-workflow-executors/apim-workflow-executors.iml" />
+      <module fileurl="file://$PROJECT_DIR$/apimgt-bpmn-workflow.iml" filepath="$PROJECT_DIR$/apimgt-bpmn-workflow.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bpmn-rest-util/bpmn-rest-util.iml" filepath="$PROJECT_DIR$/bpmn-rest-util/bpmn-rest-util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bpmn-workflow-listeners/bpmn-workflow-listeners.iml" filepath="$PROJECT_DIR$/bpmn-workflow-listeners/bpmn-workflow-listeners.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bpmn-workflows/bpmn-workflows.iml" filepath="$PROJECT_DIR$/bpmn-workflows/bpmn-workflows.iml" />
+    </modules>
+  </component>
+</project>

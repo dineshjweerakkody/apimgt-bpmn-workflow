@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="apim-workflow-executors" />
+        <module name="bpmn-rest-util" />
+        <module name="bpmn-workflow-listeners" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="apim-workflow-executors" target="1.5" />
+      <module name="apimgt-bpmn-workflow" target="1.5" />
+      <module name="bpmn-rest-util" target="1.5" />
+      <module name="bpmn-workflow-listeners" target="1.5" />
+      <module name="bpmn-workflows" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
