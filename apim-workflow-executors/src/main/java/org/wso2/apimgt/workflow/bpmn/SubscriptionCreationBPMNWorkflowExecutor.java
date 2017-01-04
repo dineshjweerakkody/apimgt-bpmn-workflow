@@ -47,7 +47,7 @@ public class SubscriptionCreationBPMNWorkflowExecutor extends WorkflowExecutor {
     @Override
     public WorkflowResponse execute(WorkflowDTO workflowDTO) throws WorkflowException {
 
-        log.info("Executing Subscription BPMN Workflow executor");
+        log.debug("Executing Subscription BPMN Workflow executor");
 
         SubscriptionWorkflowDTO subsWorkflowDTO = (SubscriptionWorkflowDTO) workflowDTO;
 
@@ -62,10 +62,11 @@ public class SubscriptionCreationBPMNWorkflowExecutor extends WorkflowExecutor {
         userWithDomain = APIUtil.replaceEmailDomainBack(userWithDomain);
 
         try {
+            // Can be used to decide to use workflow or not based on a value of the API Object
             APIProvider apiProvider = APIManagerFactory.getInstance().getAPIProvider(userWithDomain);
-            APIIdentifier apiIdentifier = new APIIdentifier(subsWorkflowDTO.getApiProvider(), subsWorkflowDTO
+            /*APIIdentifier apiIdentifier = new APIIdentifier(subsWorkflowDTO.getApiProvider(), subsWorkflowDTO
                     .getApiName(), subsWorkflowDTO.getApiVersion());
-            API api = apiProvider.getAPI(apiIdentifier);
+            API api = apiProvider.getAPI(apiIdentifier);*/
 
             String authHeader = BPMNRestAPIUtil.createBasicAuthHeader(username, password);
 
@@ -99,7 +100,7 @@ public class SubscriptionCreationBPMNWorkflowExecutor extends WorkflowExecutor {
     public WorkflowResponse complete(WorkflowDTO workflowDTO) throws WorkflowException {
         workflowDTO.setUpdatedTime(System.currentTimeMillis());
         super.complete(workflowDTO);
-        log.info("Subscription Creation [Complete] Workflow Invoked. Workflow ID : " + workflowDTO
+        log.debug("Subscription Creation [Complete] Workflow Invoked. Workflow ID : " + workflowDTO
                 .getExternalWorkflowReference() + "Workflow State : " + workflowDTO.getStatus());
 
         if (WorkflowStatus.APPROVED.equals(workflowDTO.getStatus())) {

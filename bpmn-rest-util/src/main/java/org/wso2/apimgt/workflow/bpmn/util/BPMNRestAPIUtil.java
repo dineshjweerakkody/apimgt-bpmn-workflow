@@ -20,8 +20,6 @@ public class BPMNRestAPIUtil {
 
     enum METHODS {GET, POST}
 
-    ;
-
     private static Log log = LogFactory.getLog(BPMNRestAPIUtil.class);
 
     private static String AUTH_HEADER = "Authorization";
@@ -71,8 +69,9 @@ public class BPMNRestAPIUtil {
 
             int statusCode = httpClient.executeMethod(methodObj);
 
-            if (statusCode != HttpStatus.SC_OK) {
+            if (!(statusCode >= HttpStatus.SC_OK && statusCode <= HttpStatus.SC_ACCEPTED)) {
                 log.error("Method failed: " + methodObj.getStatusLine());
+                throw new RuntimeException("Connection failed : " + statusCode);
             }
 
         } catch (HttpException e) {
@@ -82,49 +81,11 @@ public class BPMNRestAPIUtil {
             log.error("Fatal transport error: " + e.getMessage());
             e.printStackTrace();
         } finally {
-            // Release the connection.
-            methodObj.releaseConnection();
+            if(methodObj!=null) {
+                methodObj.releaseConnection();
+            }
         }
     }
-
-    /*public static void callGetRestAPI(String url, String authHeader, Map<String, String> params) {
-        HttpClient httpClient = new HttpClient();
-
-        GetMethod method = new GetMethod(url);
-        method.addRequestHeader("Content-Type", "application/json");
-        if (authHeader != null) {
-            method.addRequestHeader(AUTH_HEADER, authHeader);
-        }
-
-        try {
-            NameValuePair[] nameValuePair = new NameValuePair[params.size()];
-            int i = 0;
-            for (String name : params.keySet()) {
-                NameValuePair param = new NameValuePair();
-                param.setName(name);
-                param.setValue(params.get(name));
-                nameValuePair[i++] = param;
-            }
-
-            method.setQueryString(nameValuePair);
-            // Execute the method.
-            int statusCode = httpClient.executeMethod(method);
-
-            if (statusCode != HttpStatus.SC_OK) {
-                log.error("Method failed: " + method.getStatusLine());
-            }
-
-        } catch (HttpException e) {
-            log.error("Fatal protocol violation: " + e.getMessage());
-            e.printStackTrace();
-        } catch (IOException e) {
-            log.error("Fatal transport error: " + e.getMessage());
-            e.printStackTrace();
-        } finally {
-            // Release the connection.
-            method.releaseConnection();
-        }
-    }*/
 
     public static String createBasicAuthHeader(String userName, String password) {
         return "Basic " + new String(Base64.encodeBase64((userName + ":" + password).getBytes()));
